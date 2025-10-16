@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陈锐的个人信息</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* 左侧区域 - 头像和名字 */
+        .left-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            background: rgba(20, 20, 30, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .left-section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 5px solid #3498db;
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+            transition: all 0.5s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.8);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .name:hover {
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* 中间区域 - 事件 */
+        .middle-section {
+            flex: 2;
+            min-width: 300px;
+            padding: 30px;
+            background: rgba(20, 20, 30, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .middle-section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            display: inline-block;
+            color: #3498db;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #3498db, #9b59b6);
+            border-radius: 3px;
+        }
+
+        .event {
+            margin-bottom: 30px;
+            position: relative;
+            padding: 20px;
+            background: rgba(30, 30, 45, 0.6);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #3498db;
+        }
+
+        .event:hover {
+            transform: translateX(10px);
+            background: rgba(40, 40, 60, 0.8);
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3498db;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.3);
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+
+        .event-date {
+            font-size: 0.9rem;
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+
+        .event-description {
+            line-height: 1.6;
+        }
+
+        /* 右侧区域 - 信息 */
+        .right-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            background: rgba(20, 20, 30, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .right-section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        .info-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(30, 30, 45, 0.6);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateX(5px);
+            background: rgba(40, 40, 60, 0.8);
+        }
+
+        .info-title {
+            font-size: 1.2rem;
+            color: #3498db;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-title i {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+
+        .info-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .hobbies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .hobby {
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .hobby:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* 音乐控制 */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(20, 20, 30, 0.8);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: 2px solid #3498db;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(30, 30, 45, 0.9);
+        }
+
+        .music-control i {
+            font-size: 1.8rem;
+            color: #3498db;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-section, .middle-section, .right-section {
+                width: 100%;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 20, 30, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2980b9, #8e44ad);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧区域 -->
+        <div class="left-section animated">
+            <div class="avatar">
+                <!-- 注意：这里使用了一个占位图片，实际使用时请替换为res/REC.jpg -->
+                <img src="res/REC.jpg" alt="陈锐的头像">
+            </div>
+            <h1 class="name">陈锐</h1>
+            <p class="tagline">热爱生活，追逐梦想的少年</p>
+        </div>
+        <!-- 中间区域 -->
+        <div class="middle-section animated delay-1">
+            <h2 class="section-title">近期事件</h2>
+            <div class="timeline">
+                <div class="event">
+                    <h3 class="event-title">Roblox</h3>
+                    <div class="event-date">2025年10月</div>
+                    <p class="event-description"> TM 的 每次找我就玩Roblox</p>
+                </div>
+                <div class="event">
+                    <h3 class="event-title">道观体验活动</h3>
+                    <div class="event-date">2025年10月</div>
+                    <p class="event-description">TM 的 天天导管</p>
+                </div>
+                <div class="event">
+                    <h3 class="event-title">Funk/Phonk音乐</h3>
+                    <div class="event-date">2024年3月</div>
+                    <p class="event-description">品味是Good</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧区域 -->
+        <div class="right-section animated delay-2">
+            <h2 class="section-title">个人信息</h2>
+            
+            <div class="info-item">
+                <h3 class="info-title"><i class="fas fa-user"></i> 基本信息</h3>
+                <div class="info-content">
+                    <p><strong>年龄：</strong>13岁</p>
+                    <p><strong>性别：</strong>男</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <h3 class="info-title"><i class="fas fa-heart"></i> 兴趣爱好</h3>
+                <div class="hobbies">
+                    <span class="hobby">Roblox</span>
+                    <span class="hobby">道观</span>
+                    <span class="hobby">Funk音乐</span>
+                    <span class="hobby">Phonk音乐</span>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <h3 class="info-title"><i class="fas fa-school"></i> 就读学校</h3>
+                <div class="info-content">
+                    <p>福建省莆田市锦江中学</p>
+                    <p>八年(2025)一班</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <h3 class="info-title"><i class="fas fa-star"></i> 个人特点</h3>
+                <div class="info-content">
+                    <p>• 对科技和游戏开发有浓厚兴趣</p>
+                    <p>• 喜欢探索传统文化</p>
+                    <p>• 音乐品味独特，热爱Funk和Phonk风格</p>
+                    <p>• 学习Not，成绩food</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 音乐控制 -->
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <!-- 这里可以替换为您选择的背景音乐 -->
+        <source src="res/min.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 音乐控制
+        const musicControl = document.getElementById('musicControl');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        // 点击音乐控制按钮
+        musicControl.addEventListener('click', function() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicControl.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                bgMusic.play();
+                musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // 页面加载完成后添加动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.animated');
+            elements.forEach(element => {
+                element.style.opacity = '1';
+            });
+        });
+
+        // 滚动动画效果
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.animated');
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if(position < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
